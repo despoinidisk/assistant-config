@@ -14,9 +14,10 @@ agents.new({
 
 agents.new({
     name = "ollama",
-    host = "http://localhost:11434/v1",
-    -- model = "qwen3.5",
-    model = "gemma4",
+    host = "http://127.0.0.1:11434/v1",
+    -- model = "qwen2.5-coder",
+    model = "qwen3.5",
+    -- model = "gemma4",
     embedding_model = "nomic-embed-text",
 })
 
