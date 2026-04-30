@@ -1,25 +1,37 @@
 local agents = require("assistant.agents")
 local env = require("assistant.env")
 
-agents.new({
-    name = "openai",
-    key = env.get("OPENAI_API_KEY"),
-    model = "gpt-4o-mini"
-})
+local OLLAMA_BASE_URL = "http://127.0.0.1:11434/v1"
+local EMBEDDING_MODEL = "nomic-embed-text"
 
-agents.new({
-    name = "pie",
-    key = env.get("PIE_API_KEY")
-})
+local registry = {
+    {
+        name = "openai",
+        key = env.get("OPENAI_API_KEY"),
+        model = "gpt-4o-mini"
+    },
+    {
+        host = OLLAMA_BASE_URL,
+        embedding_model = EMBEDDING_MODEL,
+        name = "ollama-deepseek",
+        model = "deepseek-coder-v2"
+    },
+    {
+        host = OLLAMA_BASE_URL,
+        embedding_model = EMBEDDING_MODEL,
+        name = "ollama-qwen",
+        model = "qwen3.5"
+    },
+    {
+        host = OLLAMA_BASE_URL,
+        embedding_model = EMBEDDING_MODEL,
+        name = "ollama-qwen-coder",
+        model = "qwen2.5-coder"
+    }
+}
 
-agents.new({
-    name = "ollama",
-    host = "http://127.0.0.1:11434/v1",
-    -- model = "qwen2.5-coder",
-    model = "qwen3.5",
-    -- model = "gemma4",
-    embedding_model = "nomic-embed-text",
-})
+for i = 1, #registry do
+    agents.new(registry[i])
+end
 
-
-agents.default = "ollama"
+agents.default = "ollama-qwen"
