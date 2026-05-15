@@ -32,7 +32,9 @@ local registry = {
     {
         host = "http://mini0.local:52415/v1",
         name = "mini-cluster",
-        model = "mlx-community/Qwen3.5-9B-4bit"
+        model = "mlx-community/Qwen3.5-9B-8bit",
+        embedding_host = OLLAMA_BASE_URL,
+        embedding_model = EMBEDDING_MODEL,
     }
 }
 
