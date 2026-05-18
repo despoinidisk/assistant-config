@@ -14,6 +14,11 @@ The configuration is divided into several files, each responsible for a specific
 | `colorscheme.lua` | Manages the visual theme and color palette for the application. |
 | `keybinds.lua` | Defines global and module-specific keyboard shortcuts. |
 | `indexing.lua` | Configures the document indexing and search behavior. |
+| `shell.lua` | Configures shell command execution and environment settings. |
+| `logging.lua` | Manages logging configuration and output destinations. |
+| `validation.lua` | Contains logic for validating inputs and configurations. |
+| `web.lua` | Handles web-related functionality and API integrations. |
+| `env.lua` | Manages environment variables and runtime configuration. |
 | `validation.lua` | Contains logic for validating inputs and configurations. |
 
 ## 🚀 Getting Started
