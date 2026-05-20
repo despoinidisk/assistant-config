@@ -1,9 +1,11 @@
 local agents = require("assistant.agents")
-local env = require("assistant.env")
+local env    = require("assistant.env")
 
 local OLLAMA_BASE_URL = "http://127.0.0.1:11434/v1"
-local EMBEDDING_MODEL = "nomic-embed-text"
+local EXO_CLUSTER_URL = "http://mini0.local:52415/v1"
+
 local TEMPERATURE = 0.2
+
 
 local registry = {
     {
@@ -13,28 +15,28 @@ local registry = {
     },
     {
         host = OLLAMA_BASE_URL,
-        embedding_model = EMBEDDING_MODEL,
         name = "ollama-deepseek",
         model = "deepseek-coder-v2"
     },
     {
         host = OLLAMA_BASE_URL,
-        embedding_model = EMBEDDING_MODEL,
         name = "ollama-qwen",
         model = "qwen3.5"
     },
     {
         host = OLLAMA_BASE_URL,
-        embedding_model = EMBEDDING_MODEL,
         name = "ollama-qwen-coder",
         model = "qwen2.5-coder"
     },
     {
-        host = "http://mini0.local:52415/v1",
+        host = EXO_CLUSTER_URL,
         name = "mini-cluster",
         model = "mlx-community/Qwen3.5-9B-8bit",
-        embedding_host = OLLAMA_BASE_URL,
-        embedding_model = EMBEDDING_MODEL,
+    },
+    {
+        host = OLLAMA_BASE_URL,
+        name = "embedding",
+        model = "nomic-embed-text"
     }
 }
 
@@ -44,4 +46,8 @@ for i = 1, #registry do
     agents.new(item)
 end
 
-agents.default = "mini-cluster"
+agents.main = "mini-cluster"
+agents.secondary = "ollama-qwen"
+agents.plan = "mini-cluster"
+agents.summary = "ollama-qwen"
+agents.embeddings = "embedding"
